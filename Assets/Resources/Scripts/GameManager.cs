@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Text announcementText;
 
     public Button restartButton;
+    public Button nextButton;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelStart()
     {
-        announcementText.text = "LEVEL 1";
+        //announcementText.text = "LEVEL 1";
         announcementText.gameObject.SetActive(true);
         StartCoroutine(HideText());
     }
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         announcementText.text = "COMPLETED!";
         restartButton.gameObject.SetActive(true);
+        nextButton.gameObject.SetActive(true);
         announcementText.gameObject.SetActive(true);
     }
 
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator HideText()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         announcementText.gameObject.SetActive(false);
     }
 
