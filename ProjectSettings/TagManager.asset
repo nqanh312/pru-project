@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - EnemyHead
+  - Spikes
+  - Ground
+  - Start Point
+  - Save Point
+  - Finish Point
+  - Bullet
+  - GreenMonster
   layers:
   - Default
   - TransparentFX
