@@ -22,6 +22,7 @@ public class GreenMonster : MonoBehaviour
     Vector3 bulletSpawnPos;
     bool canFire, isJumping;
 
+    Rigidbody2D rb;
     SpriteRenderer sr;
     private Animator animator;
 
@@ -39,6 +40,8 @@ public class GreenMonster : MonoBehaviour
         animator = GetComponent<Animator>();
         basePosition = transform.position;
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        bossHealth.value = (float) health;
 
 
         canFire = false;
@@ -55,6 +58,11 @@ public class GreenMonster : MonoBehaviour
         if (canFire && isAlive){
             FireBullets();
             canFire= false;
+
+            if(health < startJumpingAt && !isJumping) {
+                InvokeRepeating("Jump", 0, jumpDelay);
+                isJumping = true;
+            }
         }
 
         if (isAlive && !isStatic)
@@ -78,6 +86,11 @@ public class GreenMonster : MonoBehaviour
     void Reload()
     {   
         canFire = true;
+    }
+
+    void Jump()
+    {
+        rb.AddForce(new Vector2(0, jumpSpeed));
     }
 
     void FireBullets()
@@ -111,7 +124,7 @@ public class GreenMonster : MonoBehaviour
                 if (health <= 0)
                 {
                     isAlive = false;
-                    gameObject.AddComponent<Rigidbody2D>();
+                    //gameObject.AddComponent<Rigidbody2D>();
                     animator.SetBool("IsDead", true);
                     bossHealth.gameObject.SetActive(false);
 
