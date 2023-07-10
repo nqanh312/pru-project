@@ -12,16 +12,17 @@ public class GreenMonster : MonoBehaviour
     public float distance = 1f;
     public float speed = 5f;
 
-    // public float jumpSpeed;
-    // public int startJumpingAt;
-    // public int jumpDelay;
+    public float jumpSpeed;
+    public int startJumpingAt;
+    public int jumpDelay;
 
-    // public GameObject bossBullet;
-    // public float delayBeforeFiring;
-    // public Slider bossHealth;
-    // Vector3 bulletSpawnPos;
-    // bool canFire, isJumping;
+    public GameObject bossBullet;
+    public float delayBeforeFiring;
+    public Slider bossHealth;
+    Vector3 bulletSpawnPos;
+    bool canFire, isJumping;
 
+    Rigidbody2D rb;
     SpriteRenderer sr;
     private Animator animator;
 
@@ -39,12 +40,14 @@ public class GreenMonster : MonoBehaviour
         animator = GetComponent<Animator>();
         basePosition = transform.position;
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        bossHealth.value = (float) health;
 
 
-        // canFire = false;
-        // bulletSpawnPos = gameObject.transform.FindChild("BulletSpawnPos").transform.position;
+        canFire = false;
+        bulletSpawnPos = gameObject.transform.FindChild("BulletSpawnPos").transform.position;
 
-        // Invoke("Reload", Random.Range(1f, delayBeforeFiring));
+        Invoke("Reload", Random.Range(1f, delayBeforeFiring));
     }
 
     /// <summary>
@@ -52,10 +55,15 @@ public class GreenMonster : MonoBehaviour
     /// </summary>
     void Update()
     {   
-        // if (canFire){
-        //     FireBullets();
-        //     canFire= false;
-        // }
+        if (canFire && isAlive){
+            FireBullets();
+            canFire= false;
+
+            if(health < startJumpingAt && !isJumping) {
+                InvokeRepeating("Jump", 0, jumpDelay);
+                isJumping = true;
+            }
+        }
 
         if (isAlive && !isStatic)
         {
@@ -75,17 +83,22 @@ public class GreenMonster : MonoBehaviour
         }
     }
 
-    // void Reload()
-    // {
-    //     canFire = true;
-    // }
+    void Reload()
+    {   
+        canFire = true;
+    }
 
-    // void FireBullets()
-    // {
-    //     Instantiate(bossBullet, bulletSpawnPos, Quaternion.identity);
+    void Jump()
+    {
+        rb.AddForce(new Vector2(0, jumpSpeed));
+    }
 
-    //     Invoke("Reload", delayBeforeFiring);
-    // }
+    void FireBullets()
+    {   
+        Instantiate(bossBullet, bulletSpawnPos, Quaternion.identity);
+
+        Invoke("Reload", delayBeforeFiring);
+    }
 
     /// <summary>
     /// Check if enemy hits player or if it's hit with a bullet
@@ -106,12 +119,21 @@ public class GreenMonster : MonoBehaviour
             if (isAlive && !isInvincible)
             {
                 health -= Player.instance.damage;
+                bossHealth.value = (float) health;
 
                 if (health <= 0)
                 {
                     isAlive = false;
-                    gameObject.AddComponent<Rigidbody2D>();
+                    //gameObject.AddComponent<Rigidbody2D>();
                     animator.SetBool("IsDead", true);
+                    bossHealth.gameObject.SetActive(false);
+
+
+                    // effect explosion
+                    Vector3 pos = collision.transform.position;
+                    pos.z = 20f;
+                    SFXCtrl.instance.EnemyExplosion(pos);
+                    
 
                     StartCoroutine(Delete());
                 }
@@ -145,7 +167,7 @@ public class GreenMonster : MonoBehaviour
     /// </summary>
     IEnumerator Delete()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0f);
 
         Destroy(gameObject);
     }
