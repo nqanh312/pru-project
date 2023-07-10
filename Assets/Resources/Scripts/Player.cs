@@ -183,6 +183,7 @@ public class Player : MonoBehaviour
             {
                 GameManager.instance.GameOver();
                 DeadAnimation();
+                Destroy(body);
                 isAlive = false;
             }
         }
