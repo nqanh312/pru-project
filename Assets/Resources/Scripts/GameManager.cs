@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UI;                                   // gets access to the Unity UI elements
+using System.IO;   
 
 /// <summary>
 /// Just a simple class that connects game logic with UI
@@ -17,12 +18,29 @@ public class GameManager : MonoBehaviour
 
     public Button restartButton;
     public Button nextButton;
+    public GameObject panelPause;
+
+    bool isPaused;
 
     void Start()
     {
         instance = this;
+        isPaused = false;
 
         LevelStart();
+    }
+
+    void Update(){
+        if (isPaused)
+        {
+            // set Time.timeScale = 0
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // set Time.timeScale = 1
+            Time.timeScale = 1;
+        }
     }
 
     /// <summary>
@@ -98,5 +116,29 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Shows the pause panel.
+    /// </summary>
+    public void ShowPausePanel()
+    {
+        
+        // shwo the pause menu
+        panelPause.gameObject.SetActive(true);
+
+        isPaused = true;
+    }
+
+    /// <summary>
+    /// Hides the pause panel.
+    /// </summary>
+    public void HidePausePanel()
+    {
+        
+        // hide the pause menu
+        panelPause.gameObject.SetActive(false);
+
+        isPaused = false;
     }
 }
