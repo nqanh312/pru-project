@@ -45,7 +45,7 @@ public class GreenMonster : MonoBehaviour
 
 
         canFire = false;
-        bulletSpawnPos = gameObject.transform.FindChild("BulletSpawnPos").transform.position;
+        bulletSpawnPos = gameObject.transform.Find("BulletSpawnPos").transform.position;
 
         Invoke("Reload", Random.Range(1f, delayBeforeFiring));
     }
