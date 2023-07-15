@@ -16,6 +16,7 @@ public class Sounds : MonoBehaviour
     public AudioSource hurt;
     public AudioSource jump;
     public AudioSource shot;
+    public AudioSource win;
 
     void Start()
     {
@@ -68,6 +69,11 @@ public class Sounds : MonoBehaviour
     public void PlayShot()
     {
         shot.Play();
+    }
+
+    public void WinGame()
+    {
+        win.Play();
     }
 
     /// <summary>

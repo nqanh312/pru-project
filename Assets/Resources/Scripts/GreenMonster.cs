@@ -42,6 +42,7 @@ public class GreenMonster : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         bossHealth.value = (float) health;
+        bossHealth.interactable = false;
 
 
         canFire = false;
