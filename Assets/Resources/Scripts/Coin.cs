@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        float newY = Mathf.Sin(Time.time * 5) / 25f;
+        float newY = Mathf.Sin(Time.time * 6) / 100f;
         transform.position = new Vector3(transform.position.x, transform.position.y + newY, transform.position.z);
     }
 
