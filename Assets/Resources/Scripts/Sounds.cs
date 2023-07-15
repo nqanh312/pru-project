@@ -90,6 +90,7 @@ public class Sounds : MonoBehaviour
             hurt.mute = true;
             jump.mute = true;
             shot.mute = true;
+            
         }
         else
         {
@@ -108,8 +109,11 @@ public class Sounds : MonoBehaviour
     /// <param name="mute"></param>
     public void MuteMusic(bool mute)
     {
-        if (mute)
+        if (mute) {
             background.mute = true;
+            
+        }
+            
         else
             background.mute = false;
     }

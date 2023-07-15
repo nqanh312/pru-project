@@ -41,6 +41,7 @@ public class GruzMother : MonoBehaviour
     public Slider bossHealth;
     public float damage = 0.5f;
     public float health = 10f;
+    private bool startBoss;
 
 
     void Start()
@@ -53,14 +54,31 @@ public class GruzMother : MonoBehaviour
 
         bossHealth.value = (float) health;
         bossHealth.interactable = false;
+        bossHealth.gameObject.SetActive(false);
+        startBoss = false;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        isTouchingUp = Physics2D.OverlapCircle(goundCheckUp.position, groundCheckRadius, groundLayer); 
-        isTouchingDown = Physics2D.OverlapCircle(goundCheckDown.position, groundCheckRadius, groundLayer); 
-        isTouchingWall = Physics2D.OverlapCircle(goundCheckWall.position, groundCheckRadius, groundLayer);
+    {   
+        if(startBoss == false) 
+        {
+            Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 5f);
+            for (int i = 0; i < collidersEnemies.Length; i++)
+                {
+                    if (collidersEnemies[i].gameObject.tag == "Player")
+                    {
+                        startBoss = true;
+                    }
+                }
+        }
+        if (startBoss) {
+            bossHealth.gameObject.SetActive(true);
+            isTouchingUp = Physics2D.OverlapCircle(goundCheckUp.position, groundCheckRadius, groundLayer); 
+            isTouchingDown = Physics2D.OverlapCircle(goundCheckDown.position, groundCheckRadius, groundLayer); 
+            isTouchingWall = Physics2D.OverlapCircle(goundCheckWall.position, groundCheckRadius, groundLayer);
+        }
+
     }
 
     void RandomStatePicker()

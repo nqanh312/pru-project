@@ -34,6 +34,7 @@ public class GreenMonster : MonoBehaviour
     private bool moveRight = true;
     private float previousOffset = 0;
     private bool isAlive = true;
+    private bool startBoss;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class GreenMonster : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bossHealth.value = (float) health;
         bossHealth.interactable = false;
+        startBoss = false;
 
 
         canFire = false;
@@ -56,31 +58,49 @@ public class GreenMonster : MonoBehaviour
     /// </summary>
     void Update()
     {   
-        if (canFire && isAlive){
-            FireBullets();
-            canFire= false;
+        
 
-            if(health < startJumpingAt && !isJumping) {
-                InvokeRepeating("Jump", 0, jumpDelay);
-                isJumping = true;
+if(startBoss == false) {
+Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 10f);
+        for (int i = 0; i < collidersEnemies.Length; i++)
+        {
+            if (collidersEnemies[i].gameObject.tag == "Player")
+            {
+                startBoss = true;
             }
         }
+}
 
-        if (isAlive && !isStatic)
+        if (startBoss)
         {
-            float offset = Mathf.Sin(Time.time * speed) * distance;
+            if (canFire && isAlive)
+            {
+                FireBullets();
+                canFire = false;
 
-            if (isHorizontalMovement)
-                transform.position = new Vector3(basePosition.x + offset, basePosition.y, basePosition.z);
-            else
-                transform.position = new Vector3(basePosition.x, basePosition.y + offset, basePosition.z);
+                if (health < startJumpingAt && !isJumping)
+                {
+                    InvokeRepeating("Jump", 0, jumpDelay);
+                    isJumping = true;
+                }
+            }
 
-            if (!moveRight && previousOffset > offset)
-                Flip();
-            else if (moveRight && previousOffset < offset)
-                Flip();
+            if (isAlive && !isStatic)
+            {
+                float offset = Mathf.Sin(Time.time * speed) * distance;
 
-            previousOffset = offset;
+                if (isHorizontalMovement)
+                    transform.position = new Vector3(basePosition.x + offset, basePosition.y, basePosition.z);
+                else
+                    transform.position = new Vector3(basePosition.x, basePosition.y + offset, basePosition.z);
+
+                if (!moveRight && previousOffset > offset)
+                    Flip();
+                else if (moveRight && previousOffset < offset)
+                    Flip();
+
+                previousOffset = offset;
+            }
         }
     }
 
