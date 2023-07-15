@@ -16,6 +16,7 @@ public class Sounds : MonoBehaviour
     public AudioSource hurt;
     public AudioSource jump;
     public AudioSource shot;
+    public AudioSource win;
 
     void Start()
     {
@@ -70,6 +71,11 @@ public class Sounds : MonoBehaviour
         shot.Play();
     }
 
+    public void WinGame()
+    {
+        win.Play();
+    }
+
     /// <summary>
     /// Mute or unmute all sounds
     /// </summary>
@@ -84,6 +90,7 @@ public class Sounds : MonoBehaviour
             hurt.mute = true;
             jump.mute = true;
             shot.mute = true;
+            
         }
         else
         {
@@ -102,8 +109,11 @@ public class Sounds : MonoBehaviour
     /// <param name="mute"></param>
     public void MuteMusic(bool mute)
     {
-        if (mute)
+        if (mute) {
             background.mute = true;
+            
+        }
+            
         else
             background.mute = false;
     }

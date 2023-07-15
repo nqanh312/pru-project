@@ -21,6 +21,7 @@ TagManager:
   - PlayerStuck
   - LevelOneBoss
   - GameMusic
+  - GruzMother
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - ForGruz
   - 
   - 
   - 

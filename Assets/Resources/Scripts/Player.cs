@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public Camera cam;
 
     private Animator animator;
-    private Rigidbody2D body;
+    public Rigidbody2D body;
 
     private bool isGrounded = true;
     private bool moveRight = true;
@@ -255,5 +255,6 @@ public class Player : MonoBehaviour
         {
             Grounded();
         }
+        
     }
 }
