@@ -23,12 +23,15 @@ public class GruzMother : MonoBehaviour
     [SerializeField] Transform goundCheckDown;
     [SerializeField] Transform goundCheckWall;
     [SerializeField] Transform goundCheckWall1;
+    [SerializeField] Transform playerCheck;
     [SerializeField] float groundCheckRadius;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask playerLayer;
     private bool isTouchingUp;
     private bool isTouchingDown;
     private bool isTouchingWall;
     private bool hasPlayerPositon;
+    [SerializeField]private bool isTouchingPlayer;
 
    private Vector2 playerPosition;
 
@@ -60,6 +63,7 @@ public class GruzMother : MonoBehaviour
         bossHealth.interactable = false;
         bossHealth.gameObject.SetActive(false);
         startBoss = false;
+        Sounds.instance.MuteMusicBoss(true);
     }
 
     // Update is called once per frame
@@ -67,7 +71,7 @@ public class GruzMother : MonoBehaviour
     {
         if(startBoss == false) 
         {
-            Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 15f);
+            Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 5f);
             for (int i = 0; i < collidersEnemies.Length; i++)
                 {
                     if (collidersEnemies[i].gameObject.tag == "Player")
@@ -79,12 +83,21 @@ public class GruzMother : MonoBehaviour
             bossHealth.gameObject.SetActive(true);
             Sounds.instance.MuteMusicBoss(false);
             Sounds.instance.MuteMusic(true);
+            
+        }
+    }
+
+    private void FixedUpdate() {
+        if(startBoss){
             isTouchingUp = Physics2D.OverlapCircle(goundCheckUp.position, groundCheckRadius, groundLayer); 
             isTouchingDown = Physics2D.OverlapCircle(goundCheckDown.position, groundCheckRadius, groundLayer); 
             isTouchingWall = Physics2D.OverlapCircle(goundCheckWall.position, groundCheckRadius, groundLayer);
             isTouchingWall = Physics2D.OverlapCircle(goundCheckWall1.position, groundCheckRadius, groundLayer);
+            isTouchingPlayer = Physics2D.OverlapCircle(playerCheck.position, 2f, playerLayer);
         }
     }
+
+    
 
     void RandomStatePicker()
     {
@@ -101,6 +114,7 @@ public class GruzMother : MonoBehaviour
 
    public void IdelState()
     {
+
         if (isTouchingUp && goingUp)
         {
             ChangeDirection();
@@ -125,6 +139,7 @@ public class GruzMother : MonoBehaviour
     } 
    public void AttackUpNDownState()
     {
+
         if (isTouchingUp && goingUp)
         {
             ChangeDirection();
@@ -154,7 +169,7 @@ public class GruzMother : MonoBehaviour
         if (!hasPlayerPositon)
         {
             FlipTowardsPlayer();
-             playerPosition = player.position - transform.position;
+            playerPosition = player.position - transform.position;
             playerPosition.Normalize();
             hasPlayerPositon = true;
         }
@@ -165,12 +180,13 @@ public class GruzMother : MonoBehaviour
         }
         
 
-        if (isTouchingWall || isTouchingDown)
+        if (isTouchingWall || isTouchingDown ||isTouchingPlayer)
         {
             //play Slam animation
             enemyAnim.SetTrigger("Slamed");
             enemyRB.velocity = Vector2.zero;
             hasPlayerPositon = false;
+            ChangeDirection();
         }
     }
 
@@ -218,6 +234,9 @@ public class GruzMother : MonoBehaviour
         if (collision.transform.CompareTag("Player") && isAlive)
         {
             Player.instance.Hurt(damage);
+            Debug.Log("OnCollisionEnter2D");
+            isTouchingPlayer = true;
+            ChangeDirection();
         }
         else if (collision.transform.CompareTag("Bullet"))
         {
@@ -255,6 +274,9 @@ public class GruzMother : MonoBehaviour
             }
 
             Destroy(collision.gameObject);
+        }
+        else{
+            isTouchingPlayer = false;
         }
     }
 

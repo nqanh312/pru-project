@@ -216,6 +216,12 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsHurting", true);
+        Invoke("FinishHurt",0.6f);
+    }
+
+    public void FinishHurt()
+    {
+        animator.SetBool("IsHurting", false);
     }
 
     /// <summary>
