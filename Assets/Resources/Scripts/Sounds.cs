@@ -17,6 +17,7 @@ public class Sounds : MonoBehaviour
     public AudioSource jump;
     public AudioSource shot;
     public AudioSource win;
+    public AudioSource bgBoss;
 
     void Start()
     {
@@ -116,5 +117,16 @@ public class Sounds : MonoBehaviour
             
         else
             background.mute = false;
+    }
+
+    public void MuteMusicBoss(bool mute)
+    {
+        if (mute) {
+            bgBoss.mute = true;
+            
+        }
+            
+        else
+            bgBoss.mute = false;
     }
 }

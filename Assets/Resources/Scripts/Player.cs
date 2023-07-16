@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public Camera cam;
 
     private Animator animator;
-    public Rigidbody2D body;
+    private Rigidbody2D body;
 
     private bool isGrounded = true;
     private bool moveRight = true;
@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
         transform.position = spawnPosition;
 
         cam = Camera.main;
+
+        Sounds.instance.MuteMusicBoss(false);
     }
 
     /// <summary>

@@ -50,3 +50,5 @@ MonoBehaviour:
   coinsText: {fileID: 0}
   announcementText: {fileID: 0}
   restartButton: {fileID: 0}
+  nextButton: {fileID: 0}
+  panelPause: {fileID: 0}
