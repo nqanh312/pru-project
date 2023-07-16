@@ -45,10 +45,13 @@ public class GreenMonster : MonoBehaviour
         bossHealth.value = (float) health;
         bossHealth.interactable = false;
         startBoss = false;
+        bossHealth.gameObject.SetActive(false);
 
 
         canFire = false;
         bulletSpawnPos = gameObject.transform.Find("BulletSpawnPos").transform.position;
+
+        Sounds.instance.MuteMusicBoss(true);    
 
         Invoke("Reload", Random.Range(1f, delayBeforeFiring));
     }
@@ -60,19 +63,20 @@ public class GreenMonster : MonoBehaviour
     {   
         
 
-if(startBoss == false) {
-Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 10f);
-        for (int i = 0; i < collidersEnemies.Length; i++)
-        {
-            if (collidersEnemies[i].gameObject.tag == "Player")
-            {
-                startBoss = true;
-            }
+    if(startBoss == false) {
+        Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 10f);
+                for (int i = 0; i < collidersEnemies.Length; i++)
+                {
+                    if (collidersEnemies[i].gameObject.tag == "Player")
+                    {
+                        startBoss = true;
+                    }
+                }
         }
-}
 
         if (startBoss)
         {
+            
             if (canFire && isAlive)
             {
                 FireBullets();
@@ -86,7 +90,10 @@ Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 1
             }
 
             if (isAlive && !isStatic)
-            {
+            {   
+                bossHealth.gameObject.SetActive(true);
+                Sounds.instance.MuteMusicBoss(false);
+                Sounds.instance.MuteMusic(true);
                 float offset = Mathf.Sin(Time.time * speed) * distance;
 
                 if (isHorizontalMovement)
@@ -148,6 +155,8 @@ Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 1
                     //gameObject.AddComponent<Rigidbody2D>();
                     animator.SetBool("IsDead", true);
                     bossHealth.gameObject.SetActive(false);
+                    Sounds.instance.MuteMusicBoss(true);
+                    Sounds.instance.MuteMusic(false);
 
 
                     // effect explosion

@@ -31,6 +31,7 @@ public class BossBulletCtrl : MonoBehaviour
             Player.instance.Hurt(damage);
             Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 
 }

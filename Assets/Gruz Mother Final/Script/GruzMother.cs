@@ -270,4 +270,5 @@ public class GruzMother : MonoBehaviour
 
         Destroy(gameObject);
     }
+    
 }
