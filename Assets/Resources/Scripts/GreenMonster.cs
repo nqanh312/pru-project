@@ -60,22 +60,22 @@ public class GreenMonster : MonoBehaviour
     /// If an enemy is alive and non-static then move it according to horizontal or vertical option
     /// </summary>
     void Update()
-    {   
-        
-
+    {      
     if(startBoss == false) {
-        Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 10f);
+        Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 13f);
                 for (int i = 0; i < collidersEnemies.Length; i++)
                 {
                     if (collidersEnemies[i].gameObject.tag == "Player")
                     {
                         startBoss = true;
+                        Sounds.instance.MuteMusicBoss(false);
+                        Sounds.instance.MuteMusic(true);
                     }
                 }
         }
 
         if (startBoss)
-        {
+        {      
             
             if (canFire && isAlive)
             {
@@ -92,8 +92,7 @@ public class GreenMonster : MonoBehaviour
             if (isAlive && !isStatic)
             {   
                 bossHealth.gameObject.SetActive(true);
-                Sounds.instance.MuteMusicBoss(false);
-                Sounds.instance.MuteMusic(true);
+                
                 float offset = Mathf.Sin(Time.time * speed) * distance;
 
                 if (isHorizontalMovement)

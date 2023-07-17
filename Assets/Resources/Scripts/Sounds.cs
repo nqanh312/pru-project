@@ -120,13 +120,15 @@ public class Sounds : MonoBehaviour
     }
 
     public void MuteMusicBoss(bool mute)
-    {
-        if (mute) {
-            bgBoss.mute = true;
-            
+    {   
+        if (bgBoss != null) {
+            if (mute) {
+            bgBoss.mute = true; }
+            else
+            bgBoss.mute = false;
+                  
         }
             
-        else
-            bgBoss.mute = false;
+        
     }
 }
