@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
         Sounds.instance.MuteMusicBoss(false);
 
         //set speed
+        speed = PlayerPrefs.GetFloat("speed");
+        Debug.Log(speed);
     }
 
     /// <summary>

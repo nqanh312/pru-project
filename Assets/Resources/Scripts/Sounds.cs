@@ -19,6 +19,21 @@ public class Sounds : MonoBehaviour
     public AudioSource win;
     public AudioSource bgBoss;
 
+
+
+    // private void Awake()
+    // {
+    //     if (instance == null)
+    //     {
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+
     void Start()
     {
         instance = this;

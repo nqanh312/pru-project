@@ -4426,7 +4426,7 @@ MonoBehaviour:
   jump: {fileID: 4458037150281852808}
   shot: {fileID: 4458037150672358780}
   win: {fileID: 1203856778}
-  bgBoss: {fileID: 0}
+  bgBoss: {fileID: 1203856778}
 --- !u!1 &4458037151322985075
 GameObject:
   m_ObjectHideFlags: 0
