@@ -67010,6 +67010,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2691053166534747968, guid: 07838d3e561f04ab39cddf6e7ca3906c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6581322539589413081, guid: 07838d3e561f04ab39cddf6e7ca3906c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -76925,11 +76929,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3782107190032055779, guid: d12f81bac98dd11438308bd64225f0db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 91.3
+      value: 135.8
       objectReference: {fileID: 0}
     - target: {fileID: 3782107190032055779, guid: d12f81bac98dd11438308bd64225f0db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.98
+      value: 65.78
       objectReference: {fileID: 0}
     - target: {fileID: 3782107190032055779, guid: d12f81bac98dd11438308bd64225f0db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -89124,11 +89128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3166671591064455671, guid: e797c13ef4b0e40f5bbb9b6b6e5ba4e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 91.3
+      value: 135.8
       objectReference: {fileID: 0}
     - target: {fileID: 3166671591064455671, guid: e797c13ef4b0e40f5bbb9b6b6e5ba4e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.2
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 3166671591064455671, guid: e797c13ef4b0e40f5bbb9b6b6e5ba4e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -89585,7 +89589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4404079462900316520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.3, y: 44.98, z: -10}
+  m_LocalPosition: {x: 135.8, y: 65.78, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1419529316}
@@ -89599,6 +89603,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 214719415, guid: 27c50da9a22e14f669f1da36da86e1e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 214719415, guid: 27c50da9a22e14f669f1da36da86e1e8, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 70186856bd17f15428bb8451aa0c5a40, type: 3}
     - target: {fileID: 4458037149949721689, guid: 27c50da9a22e14f669f1da36da86e1e8, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -89717,7 +89729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4760540534446091511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 111.2, y: 66.1, z: 0}
+  m_LocalPosition: {x: 108.1, y: 71.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 4760540533329150189}
@@ -89764,7 +89776,7 @@ MonoBehaviour:
   idelMovementDirection: {x: -1, y: 3}
   attackMovementSpeed: 25
   attackMovementDirection: {x: -1, y: 5}
-  attackPlayerSpeed: 20
+  attackPlayerSpeed: 10
   player: {fileID: 396579171}
   goundCheckUp: {fileID: 4760540533329150189}
   goundCheckDown: {fileID: 4760540534609930622}
@@ -89783,6 +89795,14 @@ MonoBehaviour:
   damage: 0.5
   health: 5
   BoxContinue: {fileID: 1537878797}
+  sfx:
+    sfx_coin_pickup: {fileID: 116108, guid: 520a250d5ad784c9daafddc2a8d8db7b, type: 3}
+    sfx_bullet_pickup: {fileID: 113666, guid: e08af543c29d74f4dac3bd4e7a6fa1f0, type: 3}
+    sfx_playerLandsp: {fileID: 159234, guid: 7a5b70226ffc04e8196c93d1bb513e05, type: 3}
+    sfx_fragment_1: {fileID: 1103503113088866, guid: 0e97a5eb33f134e6fa78a67302b3ba3a, type: 3}
+    sfx_fragment_2: {fileID: 1103503113088866, guid: 456bbd3a4cd7a4274b5ee00ebdda51fa, type: 3}
+    sfx_splash: {fileID: 177332, guid: c107d245af1294bba9cfc31ada72f0c0, type: 3}
+    sfx_enemy_explosion: {fileID: 181022, guid: 6cc865aeea61d4faf894fac185254654, type: 3}
 --- !u!50 &4760540534446091506
 Rigidbody2D:
   serializedVersion: 4

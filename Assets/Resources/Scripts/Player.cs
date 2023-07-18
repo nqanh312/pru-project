@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float damage = 1f;
     public int coins = 0;
 
+    //slow: 100f, normal: 300f, fast: 800f
     public float speed = 300f;
     public int extraJumps = 1;
     public float jumpPower = 7;
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
         cam = Camera.main;
 
         Sounds.instance.MuteMusicBoss(false);
+
+        //set speed
     }
 
     /// <summary>

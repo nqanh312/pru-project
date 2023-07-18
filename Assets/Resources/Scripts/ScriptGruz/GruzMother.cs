@@ -48,6 +48,7 @@ public class GruzMother : MonoBehaviour
     private bool startBoss;
 
     public GameObject BoxContinue;
+    public SFX sfx;
 
 
     void Start()
@@ -71,19 +72,17 @@ public class GruzMother : MonoBehaviour
     {
         if(startBoss == false) 
         {
-            Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 5f);
+            Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(transform.position, 10f);
             for (int i = 0; i < collidersEnemies.Length; i++)
                 {
                     if (collidersEnemies[i].gameObject.tag == "Player")
                     {
                         startBoss = true;
+                        bossHealth.gameObject.SetActive(true);
+                        Sounds.instance.MuteMusicBoss(false);
+                        Sounds.instance.MuteMusic(true);
                     }
                 }
-        } else {
-            bossHealth.gameObject.SetActive(true);
-            Sounds.instance.MuteMusicBoss(false);
-            Sounds.instance.MuteMusic(true);
-            
         }
     }
 
@@ -256,17 +255,14 @@ public class GruzMother : MonoBehaviour
                     bossHealth.gameObject.SetActive(false);
                     Destroy(BoxContinue);
 
-                    // Sounds.instance.WinGame(); 
-                    // Sounds.instance.MuteMusic(true)   ;
-
                     Sounds.instance.MuteMusicBoss(true);
                     Sounds.instance.MuteMusic(false);
 
                     //effect explosion
                     Vector3 pos = collision.transform.position;
-                    Debug.Log(pos);
                     pos.z = 20f;
-                    //SFXCtrl.instance.ShowPlayerLanding(pos);
+                    Instantiate(sfx.sfx_enemy_explosion, pos, Quaternion.identity);
+                    
 
 
                     StartCoroutine(Delete());
